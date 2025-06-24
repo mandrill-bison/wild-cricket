@@ -92,12 +92,12 @@ function init_randomize_header(){
 
 function randomize_header(){
     let colones = [];
-    for (let index = 3; index < model.tableau_score[0].length; index++) {
+    for (let index = 4; index < model.tableau_score[0].length; index++) {
         let colone = [];
         for (const joueur of model.tableau_score) {
             colone.push(joueur[index]);
         }
-        colones.unshift(colone);
+        colones.push(colone);
     }
     for (let i = 0; i < colones.length; i++) {
         if (!(colones[i].every( x => x == 0)) && !(colones[i].includes(3))) {
@@ -122,8 +122,9 @@ function handler_valider(){
     let i_joueur = model.joueur - 1;
     for (let index = 0; index < multiplier ; index++) {
         let does_hit = false;
-        if (model.tableau_score[i_joueur][touche] < 3){
-            model.tableau_score[i_joueur][touche] += 1;
+        // +1 pour compenser l'ajout de la cellule vide affichant le joueur actif
+        if (model.tableau_score[i_joueur][touche + 1] < 3){
+            model.tableau_score[i_joueur][touche +1] += 1;
             does_hit = true;
         } else {
             for (const joueur of model.tableau_score) {
@@ -180,26 +181,33 @@ function refreshApp(model){
         line.classList.remove('active_player');
     })
     lines[model.joueur - 1].classList.toggle('active_player');
+
     //Affichage du tour en cours
     document.getElementById('tour').innerText = "Tour : " + model.tour;
     
     
-
+    //Actualisation du corps du tableau
     let tableau_score = document.querySelectorAll('#tableau_scores_body > tr');
     tableau_score.forEach((row , i) => {
         row.childNodes.forEach((cell , j) => {
             cell.innerText = model.tableau_score[i][j];
         });
     });
+
+    //Actualisation du header 
     let random_header = document.querySelectorAll('#tableau_scores th.header_colone_random');
     random_header.forEach((cell, i ) => {
-        cell.innerText = model.tableau_header[i + 1];// index + 1 pour ignorer la valeur 25 du bull-eye
+        cell.innerText = model.tableau_header[i + 1]; // +1 pour éviter le 25 du bull eye 
     });
+
+    //Actualisation des boutons
     let random_buttons = document.getElementsByClassName('label_button')
     for (let i = 0; i < random_buttons.length; i++) {
         random_buttons[i].innerText = model.tableau_header[i + 1];
     }
 }
+
+
 
 function game_over(game_ender){
     document.getElementById('ecran_app').style.display = 'none';
