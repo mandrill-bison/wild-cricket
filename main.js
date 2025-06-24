@@ -41,7 +41,13 @@ function joueur_suivant(){
         model.joueur = 1;
         tour_suivant();
     }
-    refreshApp(model);
+    reset_dart_counter();
+}
+
+function reset_dart_counter(){
+    document.querySelectorAll('#fleche > img').forEach(img => {
+        img.classList.add('dart_available')
+    });
 }
 
 function tour_suivant(){
@@ -55,6 +61,8 @@ function tour_suivant(){
 function fleche_suivante(){
     previous_states.unshift({...model})
     model.fleche += 1;
+    let dart_available = document.getElementsByClassName('dart_available');
+    dart_available[dart_available.length - 1].classList.toggle('dart_available');
     model.total_touches[model.joueur - 1].total_darts += 1;
     test_game_over();
     if (model.fleche > 3){
@@ -160,6 +168,7 @@ function start_game(){
     }
     model.nb_joueurs = nb_joueurs;
     init_randomize_header();
+    reset_dart_counter();
     refreshApp(model);
 }
 
@@ -173,9 +182,7 @@ function refreshApp(model){
     lines[model.joueur - 1].classList.toggle('active_player');
     //Affichage du tour en cours
     document.getElementById('tour').innerText = "Tour : " + model.tour;
-    //Affichage des fleches restantes
-    let fleches_img = document.querySelectorAll('#fleche > img');
-    let fleches_restantes = 4 - model.fleche
+    
     
 
     let tableau_score = document.querySelectorAll('#tableau_scores_body > tr');

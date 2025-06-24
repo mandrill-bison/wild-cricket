@@ -45,7 +45,7 @@ h1, h2, h3, h4, p, table, label {
     filter: opacity(15%);
 }
 
-#fleche > img.available {
+#fleche > img.dart_available {
     filter: opacity(100%);
 }
 
