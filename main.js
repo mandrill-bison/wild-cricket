@@ -165,13 +165,19 @@ function start_game(){
 
 
 function refreshApp(model){
+    //Affichage du joueur actif
     let lines = document.querySelectorAll('#tableau_scores_body > tr');
     lines.forEach(line => {
         line.classList.remove('active_player');
     })
     lines[model.joueur - 1].classList.toggle('active_player');
+    //Affichage du tour en cours
     document.getElementById('tour').innerText = "Tour : " + model.tour;
-    document.getElementById('fleche').innerText = "Fleche : " + model.fleche;
+    //Affichage des fleches restantes
+    let fleches_img = document.querySelectorAll('#fleche > img');
+    let fleches_restantes = 4 - model.fleche
+    
+
     let tableau_score = document.querySelectorAll('#tableau_scores_body > tr');
     tableau_score.forEach((row , i) => {
         row.childNodes.forEach((cell , j) => {

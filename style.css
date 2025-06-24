@@ -38,6 +38,17 @@ h1, h2, h3, h4, p, table, label {
     border-bottom: 1px solid;
 }
 
+#fleche > img {
+    height: 60px;
+    rotate: -35deg;
+    margin-right: 8px;
+    filter: opacity(15%);
+}
+
+#fleche > img.available {
+    filter: opacity(100%);
+}
+
 #tableau_scores {
     display: block;
     margin-top: 30px;
