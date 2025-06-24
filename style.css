@@ -1,0 +1,81 @@
+#ecran_app {
+    display: none;
+    flex-direction: column;
+}
+
+#ecran_game_over {
+    display: none;
+    flex-direction: column;
+}
+
+#ecran_accueil {
+    display: grid;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+header {
+    border-top: 3px solid #c0343d;
+    border-bottom: 3px solid #c0343d;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #38312e;
+}
+
+h1, h2, h3, h4, p, table, label {
+    color: #f3e8d8;
+}
+
+#panneau_infos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom: 1px solid;
+}
+
+#tableau_scores {
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+input[type="radio"] {
+    display: none;
+
+}
+
+input[type="radio"]+label {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 15px 15px;
+    border: 2px solid;
+}
+
+input[type="radio"]:checked+label {
+    background-color: red;
+}
+
+#box_radio_multiplier, #box_radio_touche, #panel_boutons {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+ button, select, option {
+    background-color: #e69d04;
+    color: #f3e8d8;
+    font-size: 1em;
+    padding: 10px;
+    margin: 5px;
+    border: 2px solid;
+    border-radius: 15px 15px;
+}
+
+.bull_eye {
+    width: 1em;
+}

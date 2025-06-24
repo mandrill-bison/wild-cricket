@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <title>Crazy Cricket</title>
+</head>
+<body class="container">
+    <header>
+        <h1>CRAZY CRICKET</h1>
+    </header>
+    <div id="ecran_accueil" class="container">
+        <label for="nb_joueurs">Combien de joueurs ?</label>
+
+        <select name="nb_joueurs" id="select_nb_joueurs">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select> 
+        <button id="bouton_start" onclick="start_game()">Start</button>
+    </div>
+    <div id="ecran_app" class="container">
+        <div id="panneau_infos">
+            <p id="tour">Tour : </p>
+            <p id="joueur">Joueur : </p>
+            <p id="fleche">Fleche : </p>
+        </div>
+        <table id="tableau_scores">
+            <thead>
+                <tr>
+                    <th>Joueur</th>
+                    <th>Score</th>
+                    <th><img src="./assets/bull_eye.svg" alt="Bull Eye" class="bull_eye"></th>
+                    <th class="header_colone_random">20</th>
+                    <th class="header_colone_random">19</th>
+                    <th class="header_colone_random">18</th>
+                    <th class="header_colone_random">17</th>
+                    <th class="header_colone_random">16</th>
+                    <th class="header_colone_random">15</th>
+                </tr>
+            </thead>
+            <tbody id="tableau_scores_body">
+
+            </tbody>
+        </table>
+        <div id="keyboard">
+            <div id="box_radio_multiplier">
+                <input type="radio" name="multiplier" id="simple" value="1">
+                <label for="simple">x1</label>
+                <input type="radio" name="multiplier" id="double" value="2">
+                <label for="double">x2</label>
+                <input type="radio" name="multiplier" id="triple" value="3">
+                <label for="triple">x3</label>
+            </div>
+            <div id="box_radio_touche">
+                <input type="radio" name="touche" id="bull_eye" value="2">
+                <label for="bull_eye"><img src="./assets/bull_eye.svg" alt="Bull Eye" class="bull_eye"></label>
+                <input type="radio" name="touche" id="c1" value="3">
+                <label for="c1" class="label_button">C1</label>
+                <input type="radio" name="touche" id="c2" value="4">
+                <label for="c2" class="label_button">C2</label>
+                <input type="radio" name="touche" id="c3" value="5">
+                <label for="c3" class="label_button">C3</label>
+                <input type="radio" name="touche" id="c4" value="6">
+                <label for="c4" class="label_button">C4</label>
+                <input type="radio" name="touche" id="c5" value="7">
+                <label for="c5" class="label_button">C5</label>
+                <input type="radio" name="touche" id="c6" value="8">
+                <label for="c6" class="label_button">C6</label>
+            </div>
+            <div id="panel_boutons">
+                <button id="button_miss" onclick="handler_miss()">Miss</button>
+                <button id="button_valider" onclick="handler_valider()">Valider</button>
+                <button id="button_undo" onclick="handler_undo()">Undo</button>
+            </div>
+        </div>
+    </div>
+    <div id="ecran_game_over">
+        <h1>Game Over</h1>
+        <p id="reason"></p>
+        <div id="moyennes">
+            <h2>Moyennes</h2>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
