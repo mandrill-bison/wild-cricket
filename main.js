@@ -148,10 +148,10 @@ function start_game(){
     document.getElementById('ecran_app').style.display = "flex";
     for (let i = 0; i < nb_joueurs; i++) {
         let n_joueur = "J" + (i + 1).toString();
-        model.tableau_score.push([n_joueur,0,0,0,0,0,0,0,0]);
+        model.tableau_score.push([null,n_joueur,0,0,0,0,0,0,0,0]);
         model.total_touches.push(0);
         new_line = document.createElement('tr');
-        for (let c = 0; c < 9; c++) {
+        for (let c = 0; c < model.tableau_score[0].length; c++) {
             cell = document.createElement('td');
             cell.innerText = "0";
             new_line.appendChild(cell);
@@ -165,7 +165,11 @@ function start_game(){
 
 
 function refreshApp(model){
-    document.getElementById('joueur').innerText = "Joueur : " + model.joueur;
+    let lines = document.querySelectorAll('#tableau_scores_body > tr');
+    lines.forEach(line => {
+        line.classList.remove('active_player');
+    })
+    lines[model.joueur - 1].classList.toggle('active_player');
     document.getElementById('tour').innerText = "Tour : " + model.tour;
     document.getElementById('fleche').innerText = "Fleche : " + model.fleche;
     let tableau_score = document.querySelectorAll('#tableau_scores_body > tr');
