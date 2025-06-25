@@ -1,4 +1,4 @@
-var previous_states = []
+var previous_states_json = [];
 
 var model = {
     nb_joueurs: 1,
@@ -27,7 +27,7 @@ function test_game_over(){
         scores.push(player[1]);
     }
     for (const joueur of model.tableau_score) {
-        touches = joueur.slice(2)
+        let touches = joueur.slice(2);
         if ((touches.every( x => x == 3)) && (joueur[1] == Math.min(...scores))) {
             game_over(joueur[0]);
         }
@@ -70,9 +70,12 @@ function tour_suivant(){
     };
 }
 
-function fleche_suivante(){
-    previous_states.unshift({...model})
+function store_state(state){
+    previous_states_json.unshift(JSON.stringify(state));
+    console.log(previous_states_json);
+}
 
+function fleche_suivante(){
     model.fleche += 1;
     model.total_touches[model.joueur - 1].total_darts += 1;
     test_game_over();
@@ -81,10 +84,10 @@ function fleche_suivante(){
         joueur_suivant();
     };
     refreshApp(model);
-   
 }
 
 function handler_miss(){
+    store_state(model);
     fleche_suivante();
     refreshApp(model);
 }
@@ -124,6 +127,7 @@ function randomize_header(){
 }
 
 function handler_valider(){
+    store_state(model);
     let multiplier = document.querySelector('#box_radio_multiplier > input[type="radio"]:checked').value;
     let touche = document.querySelector('#box_radio_touche > input[type="radio"]:checked').value;
     multiplier = parseInt(multiplier);
@@ -133,7 +137,7 @@ function handler_valider(){
         multiplier = 2;
     }
     let i_joueur = model.joueur - 1;
-    for (let index = 0; index < multiplier ; index++) {
+    for (let index = 0; index < multiplier ; index++) {//Pour chaque touche
         let does_hit = false;
         // +1 pour compenser l'ajout de la cellule vide affichant le joueur actif
         if (model.tableau_score[i_joueur][touche + 1] < 3){
@@ -141,7 +145,7 @@ function handler_valider(){
             does_hit = true;
         } else {
             for (const joueur of model.tableau_score) {
-                if (joueur[touche] != 3) {
+                if (joueur[touche + 1] != 3) {
                     let i_touche = touche - 2;
                     joueur[2] += model.tableau_header[i_touche];
                     does_hit = true;
@@ -156,10 +160,10 @@ function handler_valider(){
 }
 
 function handler_undo(){
-    //BUG : les model.tableau_score de previous_state sont référencés qq part
-    if (previous_states.length > 0) {
-        model = {...previous_states[0]};
-        previous_states.shift();
+    if (previous_states_json.length > 0) {
+        let previous_state = JSON.parse(previous_states_json[0]);
+        model = {...previous_state};
+        previous_states_json.shift();
         refreshApp(model);
     }
 }
@@ -187,7 +191,6 @@ function start_game(){
 
 
 function refreshApp(model){
-    console.log(previous_states);
     //Affichage du joueur actif
     let lines = document.querySelectorAll('#tableau_scores_body > tr');
     lines.forEach(line => {
@@ -202,8 +205,8 @@ function refreshApp(model){
     refresh_dart_counter();
     
     //Actualisation du corps du tableau
-    let tableau_score = document.querySelectorAll('#tableau_scores_body > tr');
-    tableau_score.forEach((row , i) => {
+    let table_content = document.querySelectorAll('#tableau_scores_body > tr');
+    table_content.forEach((row , i) => {
         row.childNodes.forEach((cell , j) => {
             cell.innerText = model.tableau_score[i][j];
         });
@@ -236,7 +239,7 @@ function game_over(game_ender){
     moyennes = get_moyennes();
     for (let i = 0; i < model.nb_joueurs; i++){
         p = document.createElement('p');
-        p.innerText = model.tableau_score[i][0] + ' : ' + moyennes[i];
+        p.innerText = model.tableau_score[i][0] + ' : ' + moyennes[i];//BUG?
         document.getElementById('moyennes').appendChild(p);
     }
     document.getElementById('ecran_game_over').style.display = 'flex';
