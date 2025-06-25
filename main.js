@@ -227,6 +227,11 @@ function refreshApp(model){
         }
     });
 
+    //Actualisation du header vertical
+    document.querySelectorAll('#tableau_scores_vertical_body th.header_colone_random').forEach((cell, i) => {
+        cell.innerHTML = model.tableau_header[i + 1];
+    });
+
     //Actualisation du header horizontal
     let random_header = document.querySelectorAll('#tableau_scores th.header_colone_random');
     random_header.forEach((cell, i ) => {
