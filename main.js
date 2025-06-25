@@ -72,7 +72,6 @@ function tour_suivant(){
 
 function store_state(state){
     previous_states_json.unshift(JSON.stringify(state));
-    console.log(previous_states_json);
 }
 
 function fleche_suivante(){
@@ -173,17 +172,26 @@ function start_game(){
     document.getElementById('ecran_accueil').style.display = "none";
     document.getElementById('ecran_app').style.display = "flex";
     for (let i = 0; i < nb_joueurs; i++) {
+        //Model
         let n_joueur = "J" + (i + 1).toString();
         model.tableau_score.push([null,n_joueur,0,0,0,0,0,0,0,0]);
         model.total_touches.push(0);
+        //Vue horizontale
         new_line = document.createElement('tr');
         for (let c = 0; c < model.tableau_score[0].length; c++) {
-            cell = document.createElement('td');
-            cell.innerText = "0";
+            let cell = document.createElement('td');
             new_line.appendChild(cell);
         }
         document.getElementById('tableau_scores_body').appendChild(new_line);
     }
+    //Vue verticale
+    document.querySelectorAll('#tableau_scores_vertical_body > tr').forEach(line => {
+        for (let j = 0; j < nb_joueurs; j++) {
+            cell = document.createElement('td');
+            cell.innerText = "<3"
+            line.appendChild(cell);
+        }
+    });
     model.nb_joueurs = nb_joueurs;
     init_randomize_header();
     refreshApp(model);
@@ -212,7 +220,14 @@ function refreshApp(model){
         });
     });
 
-    //Actualisation du header 
+    //Actualisation du tableau vertical
+    document.querySelectorAll('#tableau_scores_vertical_body > tr').forEach((line, i) => {
+        for (let j = 1; j < line.children.length; j++) {
+            line.children[j].innerHTML = model.tableau_score[j - 1][i];
+        }
+    });
+
+    //Actualisation du header horizontal
     let random_header = document.querySelectorAll('#tableau_scores th.header_colone_random');
     random_header.forEach((cell, i ) => {
         cell.innerText = model.tableau_header[i + 1]; // +1 pour éviter le 25 du bull eye 

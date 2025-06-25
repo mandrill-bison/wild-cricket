@@ -55,6 +55,10 @@ h1, h2, h3, h4, p, table, label {
     margin-bottom: 30px;
 }
 
+#tableau_scores_vertical {
+    /*display: none;*/
+}
+
 input[type="radio"] {
     display: none;
 
