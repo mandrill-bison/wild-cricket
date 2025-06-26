@@ -1,7 +1,7 @@
 # TODO:
 
 ## Important
-* [] Vues verticale et horizontale du tableau
+* [/] Vues verticale et horizontale du tableau
 * [X] Implémenter Undo
 * [/] Améliorer l'écran game over : ajouter la moyenne des touches
 * [] Revoir le fonctionnement du clavier : Remplacer les radio par des boutons génériques et valider dès que les deux types de boutons sont pressés (soit retirer le bouton valider)

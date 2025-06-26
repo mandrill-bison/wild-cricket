@@ -171,6 +171,7 @@ function start_game(){
     nb_joueurs = document.getElementById('select_nb_joueurs').value; 
     document.getElementById('ecran_accueil').style.display = "none";
     document.getElementById('ecran_app').style.display = "flex";
+    document.getElementById('button_rotate').style.display = "block"
     for (let i = 0; i < nb_joueurs; i++) {
         //Model
         let n_joueur = "J" + (i + 1).toString();
@@ -214,12 +215,21 @@ function change_vue(){
 
 
 function refreshApp(model){
-    //Affichage du joueur actif
+    //Affichage du joueur actif horizontal
     let lines = document.querySelectorAll('#tableau_scores_body > tr');
     lines.forEach(line => {
         line.classList.remove('active_player');
-    })
+    });
     lines[model.joueur - 1].classList.toggle('active_player');
+
+    //Affichage joueur actif vertical
+    document.getElementById("header_tableau_vertical").childNodes.forEach((cell, i) => {
+        if (cell.nodeName == "TD") {
+            cell.classList.remove('active_player_vertical');
+        }        
+    });
+    document.getElementById("header_tableau_vertical").childNodes[model.joueur].classList.toggle('active_player_vertical');
+    
 
     //Affichage du tour en cours
     document.getElementById('tour').innerText = "Tour : " + model.tour;
