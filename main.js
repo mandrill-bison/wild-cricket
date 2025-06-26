@@ -197,6 +197,21 @@ function start_game(){
     refreshApp(model);
 }
 
+function change_vue(){
+    let vue_horizontale = document.getElementById('tableau_scores');
+    let vue_verticale = document.getElementById('tableau_scores_vertical');
+    vue_horizontale.classList.toggle('vue_active');
+    vue_verticale.classList.toggle('vue_active');
+    if (vue_horizontale.classList.contains('vue_active')) {
+        vue_horizontale.style.display = "block";
+        vue_verticale.style.display = "none";
+    } else {
+        vue_horizontale.style.display = "none";
+        vue_verticale.style.display = "block";
+    }
+    
+}
+
 
 function refreshApp(model){
     //Affichage du joueur actif

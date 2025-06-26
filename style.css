@@ -99,3 +99,21 @@ input[type="radio"]:checked+label {
     border-radius: 50%;
     display: inline-block;
 }
+
+#tableau_scores_vertical {
+    display: none;
+}
+
+button {
+    box-shadow: 0 8px grey;
+}
+
+button:hover {
+    background-color: #38312e;
+}
+
+button:active {
+    background-color: #38312e;
+    box-shadow: 0 4px grey;
+    transform: translateY(4px);
+}
