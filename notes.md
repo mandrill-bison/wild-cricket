@@ -1,13 +1,16 @@
 # TODO:
 
 ## Important
-* [/] Vues verticale et horizontale du tableau
+* [] Améliorer l'interface simplement (placer les elements, optimiser leur taille)
+* [X] Vues verticale et horizontale du tableau
 * [X] Implémenter Undo
 * [/] Améliorer l'écran game over : ajouter la moyenne des touches
 * [] Revoir le fonctionnement du clavier : Remplacer les radio par des boutons génériques et valider dès que les deux types de boutons sont pressés (soit retirer le bouton valider)
 * [] Organiser le code js : actuellement => spaghetti code
 
 ## Facultatif
+* [] Animation des nombres qui changent
+* [] Animation des changements dans le tableau
 * [] Ajouter les règles du jeu
 * [] Ajouter un à propos
 * [X] Design dans l'esprit de la scorpion 9000

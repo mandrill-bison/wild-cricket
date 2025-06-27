@@ -171,7 +171,7 @@ function start_game(){
     nb_joueurs = document.getElementById('select_nb_joueurs').value; 
     document.getElementById('ecran_accueil').style.display = "none";
     document.getElementById('ecran_app').style.display = "flex";
-    document.getElementById('button_rotate').style.display = "block"
+    document.getElementById('button_rotate').style.display = "inline-table"
     for (let i = 0; i < nb_joueurs; i++) {
         //Model
         let n_joueur = "J" + (i + 1).toString();
@@ -204,11 +204,11 @@ function change_vue(){
     vue_horizontale.classList.toggle('vue_active');
     vue_verticale.classList.toggle('vue_active');
     if (vue_horizontale.classList.contains('vue_active')) {
-        vue_horizontale.style.display = "block";
+        vue_horizontale.style.display = "inline-table";
         vue_verticale.style.display = "none";
     } else {
         vue_horizontale.style.display = "none";
-        vue_verticale.style.display = "block";
+        vue_verticale.style.display = "inline-table";
     }
     
 }
