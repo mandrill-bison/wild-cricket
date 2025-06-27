@@ -63,7 +63,6 @@ h1, h2, h3, h4, p, table, label {
     flex-direction: row;
     justify-content: space-evenly;
     border-bottom: 1px solid;
-    width: 80%;
     border: 3px solid #f3e8d8;
     border-radius: 15px;
 }
@@ -72,6 +71,7 @@ h1, h2, h3, h4, p, table, label {
     display: flex;
     flex-grow: 1;
     justify-content: center;
+    margin: auto 1.5em;
 }
 
 #panneau_infos span > img {
