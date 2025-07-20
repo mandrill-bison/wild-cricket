@@ -33,9 +33,13 @@ body {
 .dot {
     height: 15px;
     width: 15px;
-    background-color: #c0343d;
+    background-color: grey;
     border-radius: 50%;
     display: inline-block;
+}
+
+.dot.active {
+    background-color: #c0343d;
 }
 
 header {
@@ -162,10 +166,6 @@ td {
 
 button, #keyboard label {
     box-shadow: 0 6px grey;
-}
-
-button:hover, #keyboard label:hover {
-    background-color: #38312e;
 }
 
 button:active, #keyboard label:active {

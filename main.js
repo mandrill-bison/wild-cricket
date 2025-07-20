@@ -181,6 +181,11 @@ function start_game(){
         new_line = document.createElement('tr');
         for (let c = 0; c < model.tableau_score[0].length; c++) {
             let cell = document.createElement('td');
+            for (let d = 0; d < 3; d++){
+                let dot = document.createElement('span');
+                dot.classList.add('dot');
+                cell.appendChild(dot);
+            }
             new_line.appendChild(cell);
         }
         document.getElementById('tableau_scores_body').appendChild(new_line);
@@ -189,7 +194,11 @@ function start_game(){
     document.querySelectorAll('#tableau_scores_vertical_body > tr').forEach(line => {
         for (let j = 0; j < nb_joueurs; j++) {
             cell = document.createElement('td');
-            cell.innerText = "<3"
+            for (let d = 0; d < 3; d++){
+                let dot = document.createElement('span');
+                dot.classList.add('dot');
+                cell.appendChild(dot);
+            }
             line.appendChild(cell);
         }
     });
@@ -241,14 +250,30 @@ function refreshApp(model){
     let table_content = document.querySelectorAll('#tableau_scores_body > tr');
     table_content.forEach((row , i) => {
         row.childNodes.forEach((cell , j) => {
-            cell.innerText = model.tableau_score[i][j];
+            if (j < 3) {
+                cell.innerText = model.tableau_score[i][j];
+            } else {
+                cell.childNodes.forEach((dot, d) => {
+                    if (d < model.tableau_score[i][j]){
+                        dot.classList.add('active');
+                    }
+                })   
+            }
         });
     });
 
     //Actualisation du tableau vertical
     document.querySelectorAll('#tableau_scores_vertical_body > tr').forEach((line, i) => {
         for (let j = 1; j < line.children.length; j++) {
-            line.children[j].innerHTML = model.tableau_score[j - 1][i];
+            if (i < 3){
+                line.children[j].innerHTML = model.tableau_score[j - 1][i];            
+            } else {
+                line.children[j].childNodes.forEach((dot, d) => {
+                    if (d < model.tableau_score[j - 1][i]){
+                        dot.classList.add('active');
+                    }
+                })   
+            }
         }
     });
 
