@@ -138,15 +138,14 @@ function handler_valider(){
     let i_joueur = model.joueur - 1;
     for (let index = 0; index < multiplier ; index++) {//Pour chaque touche
         let does_hit = false;
-        // +1 pour compenser l'ajout de la cellule vide affichant le joueur actif
-        if (model.tableau_score[i_joueur][touche + 1] < 3){
-            model.tableau_score[i_joueur][touche +1] += 1;
+        if (model.tableau_score[i_joueur][touche] < 3){
+            model.tableau_score[i_joueur][touche] += 1;
             does_hit = true;
         } else {
             for (const joueur of model.tableau_score) {
-                if (joueur[touche + 1] != 3) {
+                if (joueur[touche] != 3) {
                     let i_touche = touche - 2;
-                    joueur[2] += model.tableau_header[i_touche];
+                    joueur[1] += model.tableau_header[i_touche];
                     does_hit = true;
                 }
             }
@@ -175,7 +174,7 @@ function start_game(){
     for (let i = 0; i < nb_joueurs; i++) {
         //Model
         let n_joueur = "J" + (i + 1).toString();
-        model.tableau_score.push([null,n_joueur,0,0,0,0,0,0,0,0]);
+        model.tableau_score.push([n_joueur,0,0,0,0,0,0,0,0]);
         model.total_touches.push(0);
         //Vue horizontale
         new_line = document.createElement('tr');
@@ -237,8 +236,7 @@ function refreshApp(model){
             cell.classList.remove('active_player_vertical');
         }        
     });
-    document.getElementById("header_tableau_vertical").childNodes[model.joueur].classList.toggle('active_player_vertical');
-    
+    document.querySelectorAll('#header_tableau_vertical > td').item(model.joueur - 1).classList.toggle('active_player_vertical');    
 
     //Affichage du tour en cours
     document.getElementById('tour').innerText = "Tour : " + model.tour;
@@ -246,11 +244,11 @@ function refreshApp(model){
     //Affichage des flèches restantes
     refresh_dart_counter();
     
-    //Actualisation du corps du tableau
+    //Actualisation du corps du tableau horizontal
     let table_content = document.querySelectorAll('#tableau_scores_body > tr');
     table_content.forEach((row , i) => {
         row.childNodes.forEach((cell , j) => {
-            if (j < 3) {
+            if (j < 2) {
                 cell.innerText = model.tableau_score[i][j];
             } else {
                 cell.childNodes.forEach((dot, d) => {
@@ -265,7 +263,7 @@ function refreshApp(model){
     //Actualisation du tableau vertical
     document.querySelectorAll('#tableau_scores_vertical_body > tr').forEach((line, i) => {
         for (let j = 1; j < line.children.length; j++) {
-            if (i < 3){
+            if (i < 2){
                 line.children[j].innerHTML = model.tableau_score[j - 1][i];            
             } else {
                 line.children[j].childNodes.forEach((dot, d) => {
