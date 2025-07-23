@@ -93,25 +93,17 @@ h1, h2, h3, h4, p, table, label {
     filter: opacity(100%);
 }
 
-input[type="radio"] {
-    display: none;
-}
 
-input[type="radio"]+label {
+#keyboard button {
     padding: 10px;
     margin: 5px;
     border-radius: 15px 15px;
     border: 2px solid;
-    flex-grow: 1;
 }
 
-input[type="radio"]:checked+label {
-    background-color: red;
-}
-
-#box_radio_multiplier, #box_radio_touche, #panel_boutons {
+#keyboard div {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: flex-end;
     margin-bottom: 20px;
 }
 

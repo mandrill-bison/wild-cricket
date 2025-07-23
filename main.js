@@ -7,6 +7,8 @@ var model = {
     fleche: 1,
     tableau_header: [25,20,19,18,17,16,15],
     tableau_score: [],
+    scores: [],
+    player_names: [],
     total_touches: []
 };
 
@@ -24,7 +26,7 @@ function get_moyennes(){
 function test_game_over(){
     let scores = []
     for (const player of model.tableau_score) {
-        scores.push(player[1]);
+        scores.push(model.scores[player]);
     }
     for (const joueur of model.tableau_score) {
         let touches = joueur.slice(2);
@@ -107,7 +109,7 @@ function init_randomize_header(){
 
 function randomize_header(){
     let colones = [];
-    for (let index = 3; index < model.tableau_score[0].length; index++) {
+    for (let index = 0; index < model.tableau_score[0].length; index++) {
         let colone = [];
         for (const joueur of model.tableau_score) {
             colone.push(joueur[index]);
@@ -125,30 +127,21 @@ function randomize_header(){
     }
 }
 
-function handler_valider(){
+function handler_keyboard(column, multi){
     store_state(model);
-    let multiplier = document.querySelector('#box_radio_multiplier > input[type="radio"]:checked').value;
-    let touche = document.querySelector('#box_radio_touche > input[type="radio"]:checked').value;
-    multiplier = parseInt(multiplier);
-    touche = parseInt(touche);
-    //Pas de triple pour le bull-eye
-    if (touche == 2 && multiplier == 3) {   
-        multiplier = 2;
-    }
     let i_joueur = model.joueur - 1;
-    for (let index = 0; index < multiplier ; index++) {//Pour chaque touche
+    for (let index = 0; index < multi ; index++) {
         let does_hit = false;
-        if (model.tableau_score[i_joueur][touche] < 3){
-            model.tableau_score[i_joueur][touche] += 1;
+        if (model.tableau_score[i_joueur][column] < 3){
+            model.tableau_score[i_joueur][column] += 1;
             does_hit = true;
-        } else {
-            for (const joueur of model.tableau_score) {
-                if (joueur[touche] != 3) {
-                    let i_touche = touche - 2;
-                    joueur[1] += model.tableau_header[i_touche];
-                    does_hit = true;
+        } 
+        else {
+           for (let joueur = 0; joueur < model.nb_joueurs; joueur ++) {
+                if (model.tableau_score[joueur][column] != 3) {
+                    model.scores[joueur] += model.tableau_header[column]
                 }
-            }
+           }
         }
         if (does_hit) {
             model.total_touches[model.joueur - 1] += 1;
@@ -170,15 +163,16 @@ function start_game(){
     nb_joueurs = document.getElementById('select_nb_joueurs').value; 
     document.getElementById('ecran_accueil').style.display = "none";
     document.getElementById('ecran_app').style.display = "flex";
-    document.getElementById('button_rotate').style.display = "inline-table"
     for (let i = 0; i < nb_joueurs; i++) {
         //Model
         let n_joueur = "J" + (i + 1).toString();
-        model.tableau_score.push([n_joueur,0,0,0,0,0,0,0,0]);
+        model.player_names.push(n_joueur);
+        model.scores.push(0);
+        model.tableau_score.push([0,0,0,0,0,0,0]);
         model.total_touches.push(0);
         //Vue horizontale
         new_line = document.createElement('tr');
-        for (let c = 0; c < model.tableau_score[0].length; c++) {
+        for (let c = 0; c < model.tableau_score[0].length + 2; c++) {
             let cell = document.createElement('td');
             for (let d = 0; d < 3; d++){
                 let dot = document.createElement('span');
@@ -248,11 +242,16 @@ function refreshApp(model){
     let table_content = document.querySelectorAll('#tableau_scores_body > tr');
     table_content.forEach((row , i) => {
         row.childNodes.forEach((cell , j) => {
-            if (j < 2) {
-                cell.innerText = model.tableau_score[i][j];
+            if (j == 0) {
+                cell.innerText = model.player_names[i];
+            } else if (j == 1) {
+                cell.innerText = model.scores[i];
             } else {
+                cell.childNodes.forEach(dot => {
+                    dot.classList.remove('active');
+                })
                 cell.childNodes.forEach((dot, d) => {
-                    if (d < model.tableau_score[i][j]){
+                    if (d < model.tableau_score[i][j - 2]){
                         dot.classList.add('active');
                     }
                 })   
@@ -263,11 +262,16 @@ function refreshApp(model){
     //Actualisation du tableau vertical
     document.querySelectorAll('#tableau_scores_vertical_body > tr').forEach((line, i) => {
         for (let j = 1; j < line.children.length; j++) {
-            if (i < 2){
-                line.children[j].innerHTML = model.tableau_score[j - 1][i];            
+            if (i == 0) {
+                line.children[j].innerHTML = model.player_names[j - 1];
+            } else if (i == 1) {
+                line.children[j].innerHTML = model.scores[j - 1];       
             } else {
+                line.children[j].childNodes.forEach(dot => {
+                    dot.classList.remove('active');
+                });
                 line.children[j].childNodes.forEach((dot, d) => {
-                    if (d < model.tableau_score[j - 1][i]){
+                    if (d < model.tableau_score[j - 1][i - 2]){
                         dot.classList.add('active');
                     }
                 })   
@@ -287,10 +291,15 @@ function refreshApp(model){
     });
 
     //Actualisation des boutons
-    let random_buttons = document.getElementsByClassName('label_button')
-    for (let i = 0; i < random_buttons.length; i++) {
-        random_buttons[i].innerText = model.tableau_header[i + 1];
-    }
+    document.querySelectorAll('#keyboard-triple .column-button').forEach((button, i) => {
+        button.innerHTML = model.tableau_header[i + 1];
+    });
+    document.querySelectorAll('#keyboard-double .column-button').forEach((button, i) => {
+        button.innerHTML = model.tableau_header[i + 1];
+    });
+    document.querySelectorAll('#keyboard-simple .column-button').forEach((button, i) => {
+        button.innerHTML = model.tableau_header[i + 1];
+    });
 }
 
 
