@@ -82,14 +82,15 @@
             </tbody>
         </table>
         <div id="keyboard">
-            <div id="keyboard-triple">
-                <p>Triple</p>
-                <button id="c1-triple" class="column-button" onclick="handler_keyboard(1, 3)"></button>
-                <button id="c2-triple" class="column-button" onclick="handler_keyboard(2, 3)"></button>
-                <button id="c3-triple" class="column-button" onclick="handler_keyboard(3, 3)"></button>
-                <button id="c4-triple" class="column-button" onclick="handler_keyboard(4, 3)"></button>
-                <button id="c5-triple" class="column-button" onclick="handler_keyboard(5, 3)"></button>
-                <button id="c6-triple" class="column-button" onclick="handler_keyboard(6, 3)"></button>
+            <div id="keyboard-simple">
+                <p>Simple</p>
+                <button id="bull-eye-triple" onclick="handler_keyboard(0, 1)"><img src="./assets/bull_eye.svg" alt="bull eye" class="bull_eye"></button>
+                <button id="c1-simple" class="column-button" onclick="handler_keyboard(1, 1)"></button>
+                <button id="c2-simple" class="column-button" onclick="handler_keyboard(2, 1)"></button>
+                <button id="c3-simple" class="column-button" onclick="handler_keyboard(3, 1)"></button>
+                <button id="c4-simple" class="column-button" onclick="handler_keyboard(4, 1)"></button>
+                <button id="c5-simple" class="column-button" onclick="handler_keyboard(5, 1)"></button>
+                <button id="c6-simple" class="column-button" onclick="handler_keyboard(6, 1)"></button>
             </div>
             <div id="keyboard-double">
                 <p>Double</p>
@@ -101,19 +102,20 @@
                 <button id="c5-double" class="column-button" onclick="handler_keyboard(5, 2)"></button>
                 <button id="c6-double" class="column-button" onclick="handler_keyboard(6, 2)"></button>
             </div>
-            <div id="keyboard-simple">
-                <p>Simple</p>
-                <button id="bull-eye-triple" onclick="handler_keyboard(0, 1)"><img src="./assets/bull_eye.svg" alt="bull eye" class="bull_eye"></button>
-                <button id="c1-simple" class="column-button" onclick="handler_keyboard(1, 1)"></button>
-                <button id="c2-simple" class="column-button" onclick="handler_keyboard(2, 1)"></button>
-                <button id="c3-simple" class="column-button" onclick="handler_keyboard(3, 1)"></button>
-                <button id="c4-simple" class="column-button" onclick="handler_keyboard(4, 1)"></button>
-                <button id="c5-simple" class="column-button" onclick="handler_keyboard(5, 1)"></button>
-                <button id="c6-simple" class="column-button" onclick="handler_keyboard(6, 1)"></button>
+            <div id="keyboard-triple">
+                <p>Triple</p>
+                <button id="c1-triple" class="column-button" onclick="handler_keyboard(1, 3)"></button>
+                <button id="c2-triple" class="column-button" onclick="handler_keyboard(2, 3)"></button>
+                <button id="c3-triple" class="column-button" onclick="handler_keyboard(3, 3)"></button>
+                <button id="c4-triple" class="column-button" onclick="handler_keyboard(4, 3)"></button>
+                <button id="c5-triple" class="column-button" onclick="handler_keyboard(5, 3)"></button>
+                <button id="c6-triple" class="column-button" onclick="handler_keyboard(6, 3)"></button>
             </div>
         </div>
-        <button onclick="handler_undo()">Undo</button>
-        <button onclick="handler_miss()">Raté</button>
+        <div id="misc_buttons">
+            <button onclick="handler_undo()">Undo</button>
+            <button onclick="handler_miss()">Raté</button>
+        </div>
     </div>
     <div id="ecran_game_over">
         <h1>Game Over</h1>

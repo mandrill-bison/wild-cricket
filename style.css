@@ -36,10 +36,12 @@ body {
     background-color: grey;
     border-radius: 50%;
     display: inline-block;
+    transition: background-color, 0.3s;
 }
 
 .dot.active {
     background-color: #c0343d;
+    transition: background-color, 0.3s;
 }
 
 header {
@@ -87,10 +89,12 @@ h1, h2, h3, h4, p, table, label {
     rotate: -35deg;
     margin-right: 8px;
     filter: opacity(15%);
+    transition: opacity, 0.3s;
 }
 
 #fleche > img.dart_available {
     filter: opacity(100%);
+    transition: opacity, 0.3s;
 }
 
 
@@ -122,8 +126,9 @@ h1, h2, h3, h4, p, table, label {
 }
 
 .active_player_vertical, .active_player > td:first-child {
-    background-color: #e69d04;
     border-radius: 10px;
+    background-color: #e69d04;
+    transition: background-color, 0.3s;
 }
 
 #tableau_scores {
