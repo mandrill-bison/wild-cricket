@@ -107,7 +107,7 @@ function init_randomize_header(){
 
 function randomize_header(){
     let colones = [];
-    for (let index = 4; index < model.tableau_score[0].length; index++) {
+    for (let index = 3; index < model.tableau_score[0].length; index++) {
         let colone = [];
         for (const joueur of model.tableau_score) {
             colone.push(joueur[index]);
