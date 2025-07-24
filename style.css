@@ -8,6 +8,11 @@
     src: url("./assets/fonts/HAMBH.TTF");
 }
 
+@font-face {
+    font-family: "Roboto";
+    src: url("./assets/fonts/Roboto-Regular.ttf");
+}
+
 #ecran_app {
     display: none;
     flex-direction: column;
@@ -66,20 +71,22 @@ body {
 }
 
 #main-container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: 600px;
     height: 100%;
     margin: auto;
 }
 
-h1, h2, h3, h4, p, table, label {
+h1, h2, h3, h4, p, table {
     color: #f3e8d8;
 }
 
 h1 {
     font-family: "Bright";
-    font-size: 5em;
-    margin: 0 0 15px 15px;
+    font-size: 3em;
+    margin: 0px 0 7px 8px;
     text-shadow: -2px -2px #c0343d, +2px -2px #c0343d,-2px +2px #c0343d, +2px +2px #c0343d;
 }
 
@@ -137,6 +144,7 @@ button img {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 10px;
+    max-width: 92vw;
 }
 
 #keyboard p {
@@ -159,7 +167,7 @@ button img {
 }
 
 button:hover {
-    background-color: #c0343d;
+    filter: brightness(70%);
 }
 
 .bull_eye {
@@ -182,8 +190,9 @@ button:hover {
     display: none;
 }
 
-td, th, label, p {
-    font-size: 1.3em;
+td, th, p {
+    font-family: "Hamb";
+    font-size: 1.5em;
 }
 
 th {
