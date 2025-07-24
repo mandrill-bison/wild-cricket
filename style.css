@@ -1,6 +1,11 @@
-body {
-    height: 100vh;
-    width: 100vw;
+@font-face {
+    font-family: "Bright";
+    src: url("./assets/fonts/Bright\ DEMO.otf");
+}
+
+@font-face {
+    font-family: "Hamb";
+    src: url("./assets/fonts/HAMBH.TTF");
 }
 
 #ecran_app {
@@ -45,23 +50,43 @@ body {
 }
 
 header {
-    border-top: 3px solid #c0343d;
-    border-bottom: 3px solid #c0343d;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-content: center;
 }
 
 body {
     font-family: 'Courier New', monospace;
     background-color: #38312e;
-    margin: 0;
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+}
+
+#main-container {
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+    margin: auto;
 }
 
 h1, h2, h3, h4, p, table, label {
     color: #f3e8d8;
+}
+
+h1 {
+    font-family: "Bright";
+    font-size: 5em;
+    margin: 0 0 15px 15px;
+    text-shadow: -2px -2px #c0343d, +2px -2px #c0343d,-2px +2px #c0343d, +2px +2px #c0343d;
+}
+
+#pannel {
+    display: flex;
+    flex-direction: row;
+    height: 5em;
 }
 
 #panneau_infos {
@@ -97,28 +122,44 @@ h1, h2, h3, h4, p, table, label {
     transition: opacity, 0.3s;
 }
 
+button img {
+    height: 1.5em;
+}
+
 
 #keyboard button {
-    padding: 10px;
-    margin: 5px;
+    width: 2.2em;
+    height: 2.2em;
     border-radius: 15px 15px;
-    border: 2px solid;
 }
 
-#keyboard div {
+#keyboard .keyboard-row {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
- button, select, option {
+#keyboard p {
+     margin: 0;
+     border-bottom: 1px solid white;
+     font-family: "Hamb";
+     font-size: 1.4em;
+     letter-spacing: 0.6em;
+}
+
+ button {
+    font-family: "Hamb";
     background-color: #e69d04;
     color: #f3e8d8;
     font-size: 1.5em;
     padding: 10px;
     margin: 5px;
-    border: 2px solid;
+    border: 0;
     border-radius: 15px 15px;
+}
+
+button:hover {
+    background-color: #c0343d;
 }
 
 .bull_eye {
@@ -155,14 +196,4 @@ td {
 
 #button_rotate {
     display: none;
-}
-
-button, #keyboard label {
-    box-shadow: 0 6px grey;
-}
-
-button:active, #keyboard label:active {
-    background-color: #38312e;
-    box-shadow: 0 4px grey;
-    transform: translateY(4px);
 }
