@@ -203,26 +203,36 @@ button:hover {
     width: 1em;
 }
 
-.active_player_vertical, .active_player > td:first-child {
-    border-radius: 10px;
-    background-color: #e69d04;
+.active_player {
+    background-color: #544945;
     transition: background-color, 0.3s;
+    border-left: 3px solid #c0343d;
+    transition: border-left, 0,3s;
 }
 
 #tableau_scores {
     display: inline-table;
     margin-top: 30px;
     margin-bottom: 30px;
-    border-collapse: collapse;
     width: 100%;
+    border-collapse: collapse;
 }
 
 #tableau_scores_vertical {
     display: none;
 }
 
+#tableau_scores thead {
+    background-color: #c0343d;
+}
+
 tr {
     height: 3em;
+    border-left: 3px solid #38312e;
+}
+
+thead > tr {
+    border-left: 3px solid #c0343d;
 }
 
 
