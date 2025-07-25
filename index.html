@@ -12,18 +12,19 @@
             <h1>Wild Cricket</h1>
         </header>
         <div id="ecran_accueil" class="container">
-            <label for="nb_joueurs">Combien de joueurs ?</label>
-            <select name="nb_joueurs" id="select_nb_joueurs">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-            </select> 
-            <button id="bouton_start" onclick="start_game()">START</button>
+            <p>Combien de joueurs ?</p>
+            <div>
+                <button onclick="start_game(1)">1</button>
+                <button onclick="start_game(2)">2</button>
+                <button onclick="start_game(3)">3</button>
+                <button onclick="start_game(4)">4</button>
+            </div>
+            <div>
+                <button onclick="start_game(5)">5</button>
+                <button onclick="start_game(6)">6</button>
+                <button onclick="start_game(7)">7</button>
+                <button onclick="start_game(8)">8</button>
+            </div>
         </div>
         <div id="ecran_app" class="container">
             <div id="pannel">
@@ -35,7 +36,10 @@
                         <img src="./assets/dart.svg" alt="dart" class="dart_counter">
                     </sapn>
                 </div>
-                <button onclick="change_vue()"><img src="assets/arrow-circle.svg" alt="rotate"></button>
+                <div id="pannel_buttons">
+                    <button onclick="handler_undo()"><img src="assets/arrow-undo.svg" alt="Undo"></button>
+                    <button onclick="handler_miss()"><img src="assets/cross.svg" alt="Miss"></button>
+                </div>
             </div>
 
             <table id="tableau_scores" class="vue_active">
@@ -122,10 +126,6 @@
                         <button id="c6-triple" class="column-button" onclick="handler_keyboard(6, 3)"></button>
                     </div>
                 </div>
-            </div>
-            <div id="misc_buttons">
-                <button onclick="handler_undo()"><img src="assets/arrow-undo.svg" alt="Undo"></button>
-                <button onclick="handler_miss()"><img src="assets/cross.svg" alt="Miss"></button>
             </div>
         </div>
         <div id="ecran_game_over">

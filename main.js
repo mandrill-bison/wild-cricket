@@ -159,8 +159,7 @@ function handler_undo(){
     }
 }
 
-function start_game(){
-    nb_joueurs = document.getElementById('select_nb_joueurs').value; 
+function start_game(nb_joueurs){
     document.getElementById('ecran_accueil').style.display = "none";
     document.getElementById('ecran_app').style.display = "flex";
     for (let i = 0; i < nb_joueurs; i++) {
