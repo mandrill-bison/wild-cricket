@@ -221,6 +221,10 @@ button:hover {
     display: none;
 }
 
+tr {
+    height: 3em;
+}
+
 
 td, th, p {
     font-family: "Verdana", "Arial";
