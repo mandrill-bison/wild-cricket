@@ -206,7 +206,7 @@ button:hover {
 .active_player {
     background-color: #544945;
     transition: background-color, 0.3s;
-    border-left: 3px solid #c0343d;
+    border-left: 3px solid #e69d04;
     transition: border-left, 0,3s;
 }
 

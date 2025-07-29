@@ -122,7 +122,7 @@ function randomize_header(){
             while (model.tableau_header.some((cell) => cell == new_number)){
                 new_number = getRndInteger(7, 20);
             }
-            model.tableau_header[i + 1] = new_number;
+            model.tableau_header[i] = new_number;
         }
     }
 }
