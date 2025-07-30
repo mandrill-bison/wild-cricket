@@ -182,36 +182,9 @@ function start_game(nb_joueurs){
         }
         document.getElementById('tableau_scores_body').appendChild(new_line);
     }
-    //Vue verticale
-    document.querySelectorAll('#tableau_scores_vertical_body > tr').forEach(line => {
-        for (let j = 0; j < nb_joueurs; j++) {
-            cell = document.createElement('td');
-            for (let d = 0; d < 3; d++){
-                let dot = document.createElement('span');
-                dot.classList.add('dot');
-                cell.appendChild(dot);
-            }
-            line.appendChild(cell);
-        }
-    });
     model.nb_joueurs = nb_joueurs;
     init_randomize_header();
     refreshApp(model);
-}
-
-function change_vue(){
-    let vue_horizontale = document.getElementById('tableau_scores');
-    let vue_verticale = document.getElementById('tableau_scores_vertical');
-    vue_horizontale.classList.toggle('vue_active');
-    vue_verticale.classList.toggle('vue_active');
-    if (vue_horizontale.classList.contains('vue_active')) {
-        vue_horizontale.style.display = "inline-table";
-        vue_verticale.style.display = "none";
-    } else {
-        vue_horizontale.style.display = "none";
-        vue_verticale.style.display = "inline-table";
-    }
-    
 }
 
 
@@ -222,14 +195,6 @@ function refreshApp(model){
         line.classList.remove('active_player');
     });
     lines[model.joueur - 1].classList.toggle('active_player');
-
-    //Affichage joueur actif vertical
-    document.getElementById("header_tableau_vertical").childNodes.forEach((cell, i) => {
-        if (cell.nodeName == "TD") {
-            cell.classList.remove('active_player_vertical');
-        }        
-    });
-    document.querySelectorAll('#header_tableau_vertical > td').item(model.joueur - 1).classList.toggle('active_player_vertical');    
 
     //Affichage du tour en cours
     document.getElementById('tour').innerText = "Tour : " + model.tour;
@@ -256,31 +221,6 @@ function refreshApp(model){
                 })   
             }
         });
-    });
-
-    //Actualisation du tableau vertical
-    document.querySelectorAll('#tableau_scores_vertical_body > tr').forEach((line, i) => {
-        for (let j = 1; j < line.children.length; j++) {
-            if (i == 0) {
-                line.children[j].innerHTML = model.player_names[j - 1];
-            } else if (i == 1) {
-                line.children[j].innerHTML = model.scores[j - 1];       
-            } else {
-                line.children[j].childNodes.forEach(dot => {
-                    dot.classList.remove('active');
-                });
-                line.children[j].childNodes.forEach((dot, d) => {
-                    if (d < model.tableau_score[j - 1][i - 2]){
-                        dot.classList.add('active');
-                    }
-                })   
-            }
-        }
-    });
-
-    //Actualisation du header vertical
-    document.querySelectorAll('#tableau_scores_vertical_body th.header_colone_random').forEach((cell, i) => {
-        cell.innerHTML = model.tableau_header[i + 1];
     });
 
     //Actualisation du header horizontal

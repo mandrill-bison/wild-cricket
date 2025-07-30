@@ -218,9 +218,6 @@ button:hover {
     border-collapse: collapse;
 }
 
-#tableau_scores_vertical {
-    display: none;
-}
 
 #tableau_scores thead {
     background-color: #c0343d;
