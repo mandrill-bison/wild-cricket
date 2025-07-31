@@ -43,11 +43,9 @@ function joueur_suivant(){
         model.joueur = 1;
         tour_suivant();
     }
-    //Compteur fleches
     reset_dart_counter();
 }
 
-//Compteur fleches
 function reset_dart_counter(){
     document.querySelectorAll('#fleche > img').forEach(img => {
         img.classList.add('dart_available')
@@ -109,22 +107,42 @@ function init_randomize_header(){
 
 function randomize_header(){
     let colones = [];
-    for (let index = 0; index < model.tableau_score[0].length; index++) {
+    for (let index = 1; index < model.tableau_score[0].length; index++) {
         let colone = [];
         for (const joueur of model.tableau_score) {
             colone.push(joueur[index]);
         }
         colones.push(colone);
     }
+    let to_animate = [];
     for (let i = 0; i < colones.length; i++) {
         if (!(colones[i].every( x => x == 0)) && !(colones[i].includes(3))) {
             let new_number = getRndInteger(7, 20);
             while (model.tableau_header.some((cell) => cell == new_number)){
                 new_number = getRndInteger(7, 20);
             }
-            model.tableau_header[i] = new_number;
+            to_animate.push([i, new_number]);
         }
     }
+    anim_roll_header(2 , 10, to_animate);
+}
+
+function anim_roll_header(duration, freq, columns){
+    let header_columns = document.getElementsByClassName("header_colone_random");
+    let counter = 0;
+    let interval_id = setInterval(() => {
+        for (column of columns) {
+            header_columns[column[0]].innerHTML = getRndInteger(0, 99).toString()
+        }
+        counter ++;
+        if ((counter / freq) > duration) {
+            clearInterval(interval_id);
+            for (column of columns) {
+                model.tableau_header[column[0]] = column[1];
+                refreshApp(model);
+            }
+        }
+    }, (1 / freq) * 1000);
 }
 
 function handler_keyboard(column, multi){
