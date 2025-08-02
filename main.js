@@ -138,7 +138,7 @@ function anim_roll_header(duration, freq, columns){
         if ((counter / freq) > duration) {
             clearInterval(interval_id);
             for (column of columns) {
-                model.tableau_header[column[0]] = column[1];
+                model.tableau_header[column[0] + 1] = column[1];
                 refreshApp(model);
             }
         }
@@ -191,7 +191,7 @@ function start_game(nb_joueurs){
         new_line = document.createElement('tr');
         for (let c = 0; c < model.tableau_score[0].length + 2; c++) {
             let cell = document.createElement('td');
-            for (let d = 0; d < 3; d++){
+           for (let d = 0; d < 3; d++){
                 let dot = document.createElement('span');
                 dot.classList.add('dot');
                 cell.appendChild(dot);
