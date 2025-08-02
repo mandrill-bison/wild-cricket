@@ -24,14 +24,9 @@ function get_moyennes(){
 }
 
 function test_game_over(){
-    let scores = []
-    for (const player of model.tableau_score) {
-        scores.push(model.scores[player]);
-    }
-    for (const joueur of model.tableau_score) {
-        let touches = joueur.slice(2);
-        if ((touches.every( x => x == 3)) && (joueur[1] == Math.min(...scores))) {
-            game_over(joueur[0]);
+    for (let i = 0 ; i < model.tableau_score.length ; i++) {
+        if ((model.tableau_score[i].every( x => x == 3)) && (model.scores[i] == Math.min(...model.scores))) {
+            game_over(model.player_names[i]);
         }
     }
 }
@@ -267,13 +262,13 @@ function game_over(game_ender){
     if (game_ender == "turns"){
         message = "Les 10 tours sont passés"
     } else {
-        message = "Le joueur " + game_ender + " à gagné !"
+        message = game_ender + " à gagné !"
     }
     document.getElementById('reason').innerText = message;
     moyennes = get_moyennes();
     for (let i = 0; i < model.nb_joueurs; i++){
         p = document.createElement('p');
-        p.innerText = model.tableau_score[i][0] + ' : ' + moyennes[i];//BUG?
+        p.innerText = model.player_names[i] + ' : ' + moyennes[i];//BUG?
         document.getElementById('moyennes').appendChild(p);
     }
     document.getElementById('ecran_game_over').style.display = 'flex';

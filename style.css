@@ -19,6 +19,9 @@
 #ecran_game_over {
     display: none;
     flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
 }
 
 #ecran_accueil {
